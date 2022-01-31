@@ -58,9 +58,9 @@
 
 <form id="form" target="_self" onsubmit="return postToGoogle();" action="" autocomplete="on"> 
   <div class="form-group row">
-    <label for="orderNumber" class="col-3 col-form-label">Order Number<span style="color:red;"> *</span></label> 
+    <label for="orderNumber" class="col-3 col-form-label">Order Number (from portal)<span style="color:red;"> *</span></label> 
     <div class="col-9">
-      <input id="orderNumber" name="entry.1498307505" placeholder="ex. 16987" type="text" required="required" class="form-control">
+      <input id="orderNumber" name="entry.1498307505" type="text" required="required" class="form-control">
     </div>
   </div>
   <div class="form-group row">
@@ -81,16 +81,22 @@
       <input id="degree" name="entry.756526118" type="text" required="required" class="form-control">
     </div>
   </div>
+    <div class="form-group row">
+    <label for="title" class="col-3 col-form-label">Title<span style="color:red;"> *</span></label> 
+    <div class="col-9">
+      <input id="title" name="entry.651612706" type="text" required="required" class="form-control">
+    </div>
+  </div>
+        <div class="form-group row">
+    <label for="certCode" class="col-3 col-form-label">HCP Number #<span style="color:red;"> *</span></label> 
+    <div class="col-9">
+      <input id="certCode" name="entry.2049138284" type="text" required="required" class="form-control">
+    </div>
+  </div>
   <div class="form-group row">
     <label for="institution" class="col-3 col-form-label">Institution<span style="color:red;"> *</span></label> 
     <div class="col-9">
       <input id="institution" name="entry.959512900" type="text" required="required" class="form-control">
-    </div>
-  </div>
-      <div class="form-group row">
-    <label for="certCode" class="col-3 col-form-label">NPI or SLN<span style="color:red;"> *</span></label> 
-    <div class="col-9">
-      <input id="certCode" name="entry.2049138284" type="text" required="required" class="form-control">
     </div>
   </div>
   <!--<div class="form-group row">
@@ -111,19 +117,19 @@
     </div>
   </div>-->
   <div class="form-group row">
-    <label class="col-3 col-form-label" for="streetAddress">HCP Street Address<span style="color:red;"> *</span></label> 
+    <label class="col-3 col-form-label" for="streetAddress">Institution Address<span style="color:red;"> *</span></label> 
     <div class="col-9">
       <input id="streetAddress" name="entry.99218834" type="text" required="required" class="form-control">
     </div>
   </div>
   <div class="form-group row">
-    <label for="city" class="col-3 col-form-label">City<span style="color:red;"> *</span></label> 
+    <label for="city" class="col-3 col-form-label">Institution City<span style="color:red;"> *</span></label> 
     <div class="col-9">
       <input id="city" name="entry.1902081938" type="text" required="required" class="form-control">
     </div>
   </div>
   <div class="form-group row">
-    <label for="state" class="col-3 col-form-label">State<span style="color:red;"> *</span></label> 
+    <label for="state" class="col-3 col-form-label">Institution State<span style="color:red;"> *</span></label> 
     <div class="col-9">
       <select id="state" name="entry.1441157464" required="required" class="custom-select">
   <option value="AL">AL</option>
@@ -182,13 +188,13 @@
     </div>
   </div>
   <div class="form-group row">
-    <label for="zip" class="col-3 col-form-label">Zip<span style="color:red;"> *</span></label> 
+    <label for="zip" class="col-3 col-form-label">Institution Zip<span style="color:red;"> *</span></label> 
     <div class="col-9">
       <input id="zip" name="entry.1462434034" type="text" required="required" class="form-control">
     </div>
   </div>
   <div class="form-group row">
-    <label for="phone" class="col-3 col-form-label">Phone<span style="color:red;"> *</span></label> 
+    <label for="phone" class="col-3 col-form-label">HCP Phone<span style="color:red;"> *</span></label> 
     <div class="col-9">
       <input id="phone" name="entry.278784797" type="text" class="form-control">
     </div>
@@ -274,7 +280,7 @@
     let txt = document.querySelectorAll('[type="text"]');
     for (let i = 0; i < txt.length; i++) {
         txt[i].oninput = () => {
-            if (!(txt[0].value == '') && !(txt[1].value == '') && !(txt[2].value == '') && !(txt[3].value == '') && !(txt[4].value == '') && !(txt[5].value == '') && !(txt[6].value == '') && !(txt[7].value == '') && !(txt[8].value == '') && !(txt[9].value == '') && !(txt[10].value == '') && !(txt[11].value == '')) {
+            if (!(txt[0].value == '') && !(txt[1].value == '') && !(txt[2].value == '') && !(txt[3].value == '') && !(txt[4].value == '') && !(txt[5].value == '') && !(txt[6].value == '') && !(txt[7].value == '') && !(txt[8].value == '') && !(txt[9].value == '') && !(txt[10].value == '') && !(txt[11].value == '') && !(txt[12].value == '')) {
                 send.removeAttribute('disabled')
             }
         }
@@ -320,6 +326,7 @@ function postToGoogle() {
                 var field13 = $("#repEmail").val();
                 var field14 = $("#selectTextbook").val();
                 var field15 = $("#cost").val();
+                var field16 = $("#title").val();
         
         //if(field1 == ""){
         //   alert('Please Fill Your HCP First Name');
@@ -350,7 +357,7 @@ function postToGoogle() {
   
                 $.ajax({
                     url: "https://docs.google.com/forms/d/e/1FAIpQLSeXdNjXS5v1LgoRTy2MRyLPUQ0RElopQZElYt-NCzJ7Y45fBQ/formResponse?",
-          data: {"entry.1498307505": field1, "entry.1923186586": field2, "entry.691786469": field3, "entry.756526118": field4, "entry.959512900": field5, "entry.2049138284": field6, "entry.99218834": field7, "entry.1902081938": field8, "entry.1441157464": field9, "entry.1462434034": field10, "entry.278784797": field11, "entry.1052154245": field12, "entry.1264590335": field13, "entry.1183263112": field14, "entry.674560534": field15,},
+          data: {"entry.1498307505": field1, "entry.1923186586": field2, "entry.691786469": field3, "entry.756526118": field4, "entry.959512900": field5, "entry.2049138284": field6, "entry.99218834": field7, "entry.1902081938": field8, "entry.1441157464": field9, "entry.1462434034": field10, "entry.278784797": field11, "entry.1052154245": field12, "entry.1264590335": field13, "entry.1183263112": field14, "entry.674560534": field15, "entry.651612706": field16,},
                     type: "POST",
                     dataType: "xml",
                     success: function(d)
